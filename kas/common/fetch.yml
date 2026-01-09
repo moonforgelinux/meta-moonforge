@@ -1,0 +1,9 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-fetch: |
+    # Ignore sstate cache to pull all sources
+    SSTATE_DIR = "/tmp/sstate"
+    # Cache version-controlled sources
+    BB_GENERATE_MIRROR_TARBALLS = "1"

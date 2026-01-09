@@ -1,0 +1,14 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-rauc-community.yml
+    - kas/include/layer/meta-moonforge-rauc.yml
+
+local_conf_header:
+  30_meta-moonforge-rauc-raspberrypi: |
+    # Extra RAUC configurations for the Raspberry Pi here
+
+repos:
+  meta-rauc-community:
+    layers:
+      meta-rauc-raspberrypi:

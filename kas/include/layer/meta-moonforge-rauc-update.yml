@@ -1,0 +1,14 @@
+header:
+  version: 16
+  includes:
+    - kas/include/layer/meta-moonforge-rauc.yml
+
+local_conf_header:
+  30_meta-moonforge-rauc-update: |
+    RAUC_BUNDLE_URL ?= "https://localhost/ota/${IMAGE_ID}/LATEST.raucb"
+    RAUC_FORCE_REBOOT_ON_UPDATE ?= "1"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-rauc-update:

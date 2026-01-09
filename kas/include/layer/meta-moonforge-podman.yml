@@ -1,0 +1,21 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-openembedded.yml
+    - kas/include/repo/meta-virtualization.yml
+    - kas/include/layer/meta-moonforge-distro.yml
+
+local_conf_header:
+  20_meta-moonforge-podman: |
+    DISTRO_FEATURES:append = " virtualization seccomp"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-podman:
+  meta-openembedded:
+    layers:
+      meta-oe:
+      meta-networking:
+      meta-filesystems:
+      meta-python:

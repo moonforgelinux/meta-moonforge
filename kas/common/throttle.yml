@@ -1,0 +1,9 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-throttle: |
+    # Limit the maximum number of parallel tasks
+    BB_NUMBER_THREADS = "4"
+    # Limit the maximum number of threads per task
+    PARALLEL_MAKE = "-j 4"

@@ -1,0 +1,21 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-openembedded.yml
+    - kas/include/repo/meta-virtualization.yml
+    - kas/include/layer/meta-moonforge-distro.yml
+
+local_conf_header:
+  20_meta-moonforge-docker: |
+    DISTRO_FEATURES:append = " virtualization"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-docker:
+  meta-openembedded:
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-filesystems:

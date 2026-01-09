@@ -1,0 +1,13 @@
+[Unit]
+Description=Cog WPE launcher for Wayland
+After=network-online.target
+Wants=network-online.target
+After=weston.service
+
+[Service]
+User=weston
+ExecStart=/usr/bin/wayland-cog-launch
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

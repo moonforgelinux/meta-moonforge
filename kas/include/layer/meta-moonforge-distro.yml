@@ -1,0 +1,53 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/bitbake.yml
+    - kas/include/repo/openembedded-core.yml
+
+distro: moonforge
+target: moonforge-image-base
+
+bblayers_conf_header:
+  10_meta-moonforge-distro: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+
+local_conf_header:
+  10_meta-moonforge-distro: |
+    USER_CLASSES ?= "buildstats"
+    # Fails the job if patches don't apply
+    PATCHRESOLVE = "noop"
+    # Sets up disk usage monitoring rules
+    BB_DISKMON_DIRS ??= "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        HALT,${TMPDIR},100M,1K \
+        HALT,${DL_DIR},100M,1K \
+        HALT,${SSTATE_DIR},100M,1K \
+        HALT,/tmp,10M,1K"
+    # Sets up persistent data partition
+    OVERLAYFS_ETC_DEVICE ?= ""
+    # Sets minimum size of the data partition
+    IMAGE_DATA_MIN_SIZE ?= "100M"
+    # Enable overlayfs for persistent data
+    KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
+
+build_system: oe
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-distro:
+  bitbake:
+    layers:
+      .: disabled
+  openembedded-core:
+    layers:
+      meta:
+
+env:
+  IMAGE_ID: local
+  IMAGE_VERSION: "0"

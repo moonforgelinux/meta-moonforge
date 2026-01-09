@@ -1,0 +1,19 @@
+#
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 Igalia S.L.
+#
+
+[Unit]
+Description=Automatic System Update (RAUC)
+Wants=network-online.target
+After=network-online.target
+ConditionVirtualization=!container
+
+[Service]
+Type=simple
+NotifyAccess=main
+ExecStart=/usr/bin/rauc-update @RAUC_FLAGS@ @RAUC_BUNDLE_URL@
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+Also=rauc-update.timer

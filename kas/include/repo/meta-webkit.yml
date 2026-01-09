@@ -1,0 +1,8 @@
+header:
+  version: 13
+
+repos:
+  meta-webkit:
+    url: https://github.com/Igalia/meta-webkit.git
+    commit: 2d29669a3d78e462276044f3f8bde0e4dec33696
+    branch: scarthgap

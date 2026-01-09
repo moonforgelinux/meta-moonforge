@@ -1,0 +1,8 @@
+header:
+  version: 16
+
+repos:
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    commit: 5240b5c200e594b494a7f1a8f9d81e7c09bc8939
+    branch: scarthgap

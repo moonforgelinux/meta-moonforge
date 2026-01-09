@@ -1,0 +1,8 @@
+header:
+  version: 16
+
+repos:
+  meta-rauc-community:
+    url: https://github.com/rauc/meta-rauc-community
+    commit: 222c61275054974cdbd09bd5faa2b7a37ddbd840
+    branch: scarthgap

@@ -1,0 +1,9 @@
+header:
+  version: 16
+  includes:
+    - kas/include/layer/meta-moonforge-distro.yml
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-qemu:

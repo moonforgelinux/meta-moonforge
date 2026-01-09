@@ -1,0 +1,9 @@
+header:
+  version: 16
+  includes:
+    - kas/include/layer/meta-moonforge-rauc.yml
+
+local_conf_header:
+  30_meta-moonforge-rauc-qemu: |
+    PREFERRED_RPROVIDER_virtual-grub-bootconf = "rauc-qemu-grubconf"
+    IMAGE_EFI_BOOT_FILES += "grubenv"

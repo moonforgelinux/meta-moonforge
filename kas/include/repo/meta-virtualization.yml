@@ -1,0 +1,8 @@
+header:
+  version: 16
+
+repos:
+  meta-virtualization:
+    url: https://git.yoctoproject.org/meta-virtualization
+    commit: af1db2042caf8021d767dce1b26c08b59b96f3d1
+    branch: scarthgap

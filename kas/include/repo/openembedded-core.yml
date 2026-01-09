@@ -1,0 +1,12 @@
+header:
+  version: 16
+
+repos:
+  openembedded-core:
+    url: https://git.openembedded.org/openembedded-core
+    commit: 7af6b75221d5703ba5bf43c7cd9f1e7a2e0ed20b
+    tag: yocto-5.0.13
+    patches:
+      fix-volatile-binds:
+        repo: meta-moonforge
+        path: kas/include/repo/patches/openembedded-core-fix-volatile-binds.patch

@@ -1,0 +1,22 @@
+header:
+  version: 16
+  includes:
+    - kas/include/layer/meta-moonforge-distro.yml
+    - kas/include/layer/meta-moonforge-raspberrypi.yml
+    - kas/include/layer/meta-moonforge-podman.yml
+    - kas/include/layer/meta-moonforge-graphics.yml
+    - kas/include/layer/meta-moonforge-wpe.yml
+
+local_conf_header:
+  30_meta-moonforge-wpe: |
+    WAYLAND_COG_LAUNCH_URL = "https://www.igalia.com"
+  30_meta-moonforge-raspberrypi: |
+    # Specifies description file for partitioning the image
+    WKS_FILE = "moonforge-image-base-raspberrypi.wks.in"
+  20_meta-moonforge-distro: |
+    # Sets up persistent data partition
+    OVERLAYFS_ETC_DEVICE = "/dev/mmcblk0p3"
+    # Sets minimum size of the data partition
+    IMAGE_DATA_MIN_SIZE = "4096M"
+
+machine: raspberrypi4-64

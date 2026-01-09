@@ -1,0 +1,18 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-lts-mixins.yml
+    - kas/include/repo/meta-raspberrypi.yml
+    - kas/include/layer/meta-moonforge-distro.yml
+
+local_conf_header:
+  20_meta-moonforge-raspberrypi: |
+    # meta-raspberry
+    ENABLE_UART = "1"
+    RPI_USE_U_BOOT = "1"
+    LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-raspberrypi:

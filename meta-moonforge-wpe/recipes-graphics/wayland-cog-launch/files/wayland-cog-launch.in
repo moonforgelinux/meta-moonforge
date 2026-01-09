@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [[ -z $XDG_RUNTIME_DIR ]] ; then
+  XDG_RUNTIME_DIR="/run/user/$(id -u)"
+fi
+
+if [[ -z $WAYLAND_DISPLAY ]] ; then
+  for path in "$XDG_RUNTIME_DIR"/* ; do
+    name=${path#${XDG_RUNTIME_DIR}/}
+    if [[ $name = wayland-* && -S $path ]] ; then
+      WAYLAND_DISPLAY=$name
+      break
+    fi
+  done
+fi
+
+if [[ -z $WAYLAND_DISPLAY ]] ; then
+  echo 'No Wayland compositor running'
+else
+  export WAYLAND_DISPLAY XDG_RUNTIME_DIR
+fi
+
+export COG_PLATFORM_WL_VIEW_FULLSCREEN=1
+
+/usr/bin/cog "@wayland-cog-launch-url@"

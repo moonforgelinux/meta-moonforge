@@ -1,0 +1,5 @@
+bootloader --ptable gpt --configfile="${DEPLOY_DIR_IMAGE}/grub.cfg"
+part --fixed-size 50M --source bootimg-efi --sourceparams="loader=grub-efi,install-kernel-into-boot-dir=false" --fstype=vfat --ondisk sda --label boot --active --align 4096
+part / --source rootfs --ondisk sda --fstype=ext4 --label root_a --fixed-size=1024M --align 4096
+part / --source empty --ondisk sda --fstype=ext4 --label root_b --fixed-size=1024M --align 4096
+part --fixed-size "${IMAGE_DATA_MIN_SIZE}" --ondisk sda --fstype=ext4 --label data --align 4096

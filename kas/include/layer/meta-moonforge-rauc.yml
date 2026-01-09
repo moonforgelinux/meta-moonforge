@@ -1,0 +1,13 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-rauc.yml
+
+local_conf_header:
+  20_meta-moonforge-rauc: |
+    DISTRO_FEATURES:append = " rauc"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-rauc:

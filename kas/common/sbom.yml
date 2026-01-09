@@ -1,0 +1,10 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-sbom: |
+    # Generate spdx SBOM
+    INHERIT += "create-spdx"
+    SPDX_ARCHIVE_PACKAGED = "0"
+    # We need debug symbols so that SPDX license manifests for the kernel work
+    KERNEL_EXTRA_FEATURES:append = " features/debug/debug-kernel.scc"

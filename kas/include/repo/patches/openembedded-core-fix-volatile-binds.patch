@@ -1,0 +1,26 @@
+From f7d998601c102718a78d3ea0cf696e12a79bfa66 Mon Sep 17 00:00:00 2001
+From: Martin Abente Lahaye <mabente@igalia.com>
+Date: Mon, 24 Nov 2025 13:38:12 -0300
+Subject: [PATCH] volatile-binds: Mount overlays after filesystem is set to
+ read-only
+
+---
+ .../recipes-core/volatile-binds/files/volatile-binds.service.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta/recipes-core/volatile-binds/files/volatile-binds.service.in b/meta/recipes-core/volatile-binds/files/volatile-binds.service.in
+index 5a0055bec3..c0f5c31675 100644
+--- a/meta/recipes-core/volatile-binds/files/volatile-binds.service.in
++++ b/meta/recipes-core/volatile-binds/files/volatile-binds.service.in
+@@ -2,6 +2,8 @@
+ Description=Bind mount volatile @where@
+ DefaultDependencies=no
+ Before=local-fs.target
++After=systemd-remount-fs.service
++Requires=systemd-remount-fs.service
+ RequiresMountsFor=@whatparent@ @whereparent@
+ ConditionPathIsReadWrite=|@whatparent@
+ ConditionPathExists=|!@whatparent@
+-- 
+2.51.1
+

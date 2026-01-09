@@ -1,0 +1,7 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-cve: |
+    # Generate custom CVE report
+    INHERIT += "cve-check cve-report-native"

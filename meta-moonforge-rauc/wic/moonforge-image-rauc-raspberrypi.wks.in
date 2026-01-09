@@ -1,0 +1,5 @@
+part --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --fixed-size 128M --align 4096
+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label rootfs_A --fixed-size 1024M --align 4096
+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label rootfs_B --fixed-size 1024M --align 4096
+part --ondisk mmcblk0 --fstype=ext4 --label data --fixed-size "${IMAGE_DATA_MIN_SIZE}" --align 4096
+

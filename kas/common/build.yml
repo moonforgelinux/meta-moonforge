@@ -1,0 +1,7 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-build: |
+    # Build from cached sources only
+    BB_NO_NETWORK = "1"

@@ -1,0 +1,8 @@
+header:
+  version: 16
+
+repos:
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    commit: 15e18246dd0c0585cd1515a0be8ee5e2016d1329
+    branch: scarthgap

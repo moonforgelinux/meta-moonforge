@@ -1,0 +1,24 @@
+header:
+  version: 16
+  includes:
+    - kas/include/layer/meta-moonforge-distro.yml
+    - kas/include/layer/meta-moonforge-raspberrypi.yml
+    - kas/include/layer/meta-moonforge-docker.yml
+    - kas/include/layer/meta-moonforge-rauc-raspberrypi.yml
+    - kas/include/layer/meta-moonforge-rauc-update.yml
+
+local_conf_header:
+  40_meta-moonforge-rauc-update: |
+    # Sets rauc-update server
+    RAUC_BUNDLE_URL = "http://192.168.100.14:3333/LATEST.raucb"
+    RAUC_FORCE_REBOOT_ON_UPDATE = "1"
+  40_meta-moonforge-rauc-raspberrypi: |
+    # Sets description file for partitioning the image
+    WKS_FILE = "moonforge-image-rauc-raspberrypi.wks.in"
+  20_meta-moonforge-distro: |
+    # Sets up persistent data partition
+    OVERLAYFS_ETC_DEVICE = "/dev/mmcblk0p4"
+    # Sets minimum size of the data partition
+    IMAGE_DATA_MIN_SIZE = "4096M"
+
+machine: raspberrypi4-64

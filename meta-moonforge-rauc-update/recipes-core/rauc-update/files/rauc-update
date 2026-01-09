@@ -1,0 +1,91 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 Igalia S.L.
+#
+
+# Parse bundle URL and force reboot flag
+
+usage() {
+  echo "USAGE: $0 [-r] URL"
+  exit 1
+}
+
+while getopts ":r" opt; do
+  case "$opt" in
+    r)
+      RAUC_FORCE_REBOOT_ON_UPDATE="1"
+      ;;
+    \?)
+      usage
+      ;;
+  esac
+done
+
+shift "$((OPTIND - 1))"
+
+if [ -n "$1" ]; then
+    RAUC_BUNDLE_URL="$1"
+else
+    usage
+fi
+
+# Read current os-release metadata
+
+source /etc/os-release
+
+# Read current version(s)
+
+source <(/usr/bin/rauc status --detailed --output-format=shell)
+
+# Read remote bundle version
+
+source <(/usr/bin/rauc info $RAUC_BUNDLE_URL --output-format=shell)
+
+if [[ -z "${RAUC_MF_VERSION+x}" ]]; then
+    echo "ERROR: could not determine RAUC_MF_VERSION."
+    exit 1
+fi
+
+# Don't update if it's the current version (based on os-release)
+
+if [[ "$RAUC_MF_VERSION" == "$IMAGE_VERSION" ]]; then
+    echo "INFO: version $RAUC_MF_VERSION already installed on active slot."
+    exit 0
+fi
+
+# Determine active and inactive versions
+
+if [[ "$RAUC_SLOT_STATE_1" == "booted" ]]; then
+    ACTIVE_VERSION=$RAUC_SLOT_STATUS_BUNDLE_VERSION_1
+    INACTIVE_VERSION=$RAUC_SLOT_STATUS_BUNDLE_VERSION_2
+else
+    ACTIVE_VERSION=$RAUC_SLOT_STATUS_BUNDLE_VERSION_2
+    INACTIVE_VERSION=$RAUC_SLOT_STATUS_BUNDLE_VERSION_1
+fi
+
+# Don't update if it's the current version (based on RAUC status)
+
+if [[ "$RAUC_MF_VERSION" == "$ACTIVE_VERSION" ]]; then
+    echo "INFO: version $RAUC_MF_VERSION already installed on active slot."
+    exit 0
+fi
+
+# Don't update if it was previously installed (based on RAUC status)
+
+if [[ "$RAUC_MF_VERSION" == "$INACTIVE_VERSION" ]]; then
+    echo "INFO: version $RAUC_MF_VERSION already installed on inactive slot."
+    exit 0
+fi
+
+# Try to update
+
+if ! /usr/bin/rauc install "$RAUC_BUNDLE_URL"; then
+    exit 1
+fi
+
+# Reboot if required
+
+if [ -n "$RAUC_FORCE_REBOOT_ON_UPDATE" ]; then
+    reboot
+fi

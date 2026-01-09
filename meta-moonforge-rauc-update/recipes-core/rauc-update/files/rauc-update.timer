@@ -1,0 +1,18 @@
+#
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 Igalia S.L.
+#
+
+[Unit]
+Description=Automatic System Update (RAUC)
+ConditionVirtualization=!container
+
+[Timer]
+OnBootSec=15min
+OnUnitActive=2h
+OnCalendar=Mon
+RandomizedDelaySec=4h
+Persistent=yes
+
+[Install]
+WantedBy=timers.target

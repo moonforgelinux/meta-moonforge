@@ -1,0 +1,20 @@
+header:
+  version: 16
+  includes:
+    - kas/include/repo/meta-openembedded.yml
+    - kas/include/repo/meta-webkit.yml
+    - kas/include/layer/meta-moonforge-graphics.yml
+
+local_conf_header:
+  20_meta-moonforge-wpe: |
+    PREFERRED_PROVIDER_virtual/wpebackend = "wpebackend-fdo"
+
+repos:
+  meta-moonforge:
+    layers:
+      meta-moonforge-wpe:
+  meta-openembedded:
+    layers:
+      meta-oe:
+      meta-python:
+      meta-multimedia:
