@@ -7,7 +7,7 @@ header:
 
 local_conf_header:
   20_meta-moonforge-docker: |
-    DISTRO_FEATURES:append = " virtualization"
+    DISTRO_FEATURES:append = " virtualization seccomp"
 
 repos:
   meta-moonforge:
