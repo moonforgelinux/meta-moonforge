@@ -1,0 +1,9 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-no-gplv3: |
+    # See examples at openembedded-core/meta/conf/distro/include/no-gplv3.inc
+    INCOMPATIBLE_LICENSE:pn-moonforge-image-base += "GPL-3.0* LGPL-3.0* AGPL-3.0*"
+    BAD_RECOMMENDATIONS:pn-moonforge-image-base += "kbd-keymaps-pine gpgme-tool dosfstools"
+    PACKAGECONFIG:remove:pn-bluez5 = "readline"
