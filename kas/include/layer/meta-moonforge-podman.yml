@@ -7,7 +7,7 @@ header:
 
 local_conf_header:
   20_meta-moonforge-podman: |
-    DISTRO_FEATURES:append = " virtualization seccomp"
+    DISTRO_FEATURES:append = " virtualization seccomp ipv6"
 
 repos:
   meta-moonforge:
