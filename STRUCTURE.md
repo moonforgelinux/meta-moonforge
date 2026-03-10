@@ -35,7 +35,7 @@ header:
 
 local_conf_header:
   30_meta-moonforge-wpe: |
-    WAYLAND_COG_LAUNCH_URL = "https://www.moonforgelinux.com"
+    WAYLAND_COG_LAUNCH_URL = "https://www.moonforgelinux.org"
   30_meta-moonforge-raspberrypi: |
     # Specifies description file for partitioning the image
     WKS_FILE = "moonforge-image-base-raspberrypi.wks.in"

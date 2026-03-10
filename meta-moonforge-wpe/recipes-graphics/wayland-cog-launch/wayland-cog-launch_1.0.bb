@@ -27,7 +27,7 @@ RDEPENDS:${PN} = " \
     cog \
 "
 
-WAYLAND_COG_LAUNCH_URL ?= "https://www.moonforgelinux.com"
+WAYLAND_COG_LAUNCH_URL ?= "https://www.moonforgelinux.org"
 
 do_compile () {
 	sed -e "s|@wayland-cog-launch-url@|${WAYLAND_COG_LAUNCH_URL}|g" wayland-cog-launch.in > wayland-cog-launch
