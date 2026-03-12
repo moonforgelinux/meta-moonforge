@@ -80,7 +80,7 @@ This repository can be used as any other regular Yocto layer to build derivative
 
 Please send your patches as Pull Requests or fill an issue report to the [meta-moonforge](https://github.com/moonforgelinux/meta-moonforge) repository.
 
-Maintainer: The Moonforge Linux team contact@moonforgelinux.org
+Maintainer: The Moonforge Linux team info@moonforgelinux.org
 
 See the [structure documentation](./STRUCTURE.md) for better understanding of this repository.
 
