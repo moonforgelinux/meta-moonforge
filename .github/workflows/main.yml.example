@@ -21,15 +21,19 @@ jobs:
         machine:
           - qemux86-64
           - raspberrypi5
+        variant:
+          - base
+          - full
+          - alt
     steps:
       - uses: actions/checkout@v6
       - uses: rlespinasse/github-slug-action@9e7def61550737ba68c62d34a32dd31792e3f429 #v5.5.0
       - uses: moonforgelinux/build-moonforge-action@990696f671bd414f4396d41db9c9fc35040f8a14 #v0.1.1
         with:
-          kas_file: kas/examples/moonforge-image-base-${{ matrix.machine }}.yml:kas/common/debug.yml
+          kas_file: kas/examples/moonforge-image-${{ matrix.variant }}-${{ matrix.machine }}.yml:kas/common/debug.yml
           dl_dir: ${{ vars.DL_DIR }}
           sstate_dir: ${{ vars.SSTATE_DIR }}
-          image_id: ${{ env.GITHUB_REF_NAME_SLUG }}
+          image_id: ${{ matrix.variant }}-${{ matrix.machine }}-${{ env.GITHUB_REF_NAME_SLUG }}
           image_version: ${{ github.run_id }}
       - uses: moonforgelinux/upload-moonforge-action@d81e5795bf561735e2331b3d7705884f170dfff9 #v0.2.1
         if: >
@@ -42,7 +46,7 @@ jobs:
           secret_key: ${{ secrets.S3_SECRET_KEY }}
           bucket: ${{ secrets.S3_BUCKET }}
           source: build/tmp/deploy/images/${{ matrix.machine }}
-          destination: meta-moonforge/${{ github.ref }}/${{ github.run_id }}/
+          destination: meta-moonforge/${{ github.ref }}/${{ github.run_id }}/${{ matrix.variant }}/
           exclude: '*'
           include: '*.wic.*'
 
