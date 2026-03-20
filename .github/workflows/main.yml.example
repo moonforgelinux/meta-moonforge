@@ -30,7 +30,7 @@ jobs:
       - uses: rlespinasse/github-slug-action@9e7def61550737ba68c62d34a32dd31792e3f429 #v5.5.0
       - uses: moonforgelinux/build-moonforge-action@990696f671bd414f4396d41db9c9fc35040f8a14 #v0.1.1
         with:
-          kas_file: kas/examples/moonforge-image-${{ matrix.variant }}-${{ matrix.machine }}.yml:kas/common/debug.yml
+          kas_file: kas/examples/moonforge-image-${{ matrix.variant }}-${{ matrix.machine }}.yml:kas/common/debug.yml:kas/common/throttle.yml
           dl_dir: ${{ vars.DL_DIR }}
           sstate_dir: ${{ vars.SSTATE_DIR }}
           image_id: ${{ matrix.variant }}-${{ matrix.machine }}-${{ env.GITHUB_REF_NAME_SLUG }}
