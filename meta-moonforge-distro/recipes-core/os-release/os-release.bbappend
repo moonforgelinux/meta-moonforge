@@ -1,6 +1,6 @@
 #
 # SPDX-License-Identifier: MIT
-# SPDX-FileCopyrightText: 2025 Igalia S.L.
+# SPDX-FileCopyrightText: 2025-2026 Igalia S.L.
 #
 
 OS_RELEASE_FIELDS += " \
