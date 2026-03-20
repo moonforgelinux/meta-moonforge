@@ -30,6 +30,10 @@ jobs:
           image_id: ${{ env.GITHUB_REF_NAME_SLUG }}
           image_version: ${{ github.run_id }}
       - uses: moonforgelinux/upload-moonforge-action@v0.1.0
+        if: >
+           github.event_name == 'push' || (
+           github.event_name == 'pull_request' &&
+           github.event.pull_request.head.repo.fork == false )
         with:
           host_base: ${{ secrets.S3_HOST_BASE }}
           access_key: ${{ secrets.S3_ACCESS_KEY }}
@@ -41,7 +45,9 @@ jobs:
           include: '*.wic.*'
 
   publish:
-    if: ${{ github.event_name == 'pull_request' }}
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.fork == false
     runs-on: self-hosted
     needs: build
     permissions:
