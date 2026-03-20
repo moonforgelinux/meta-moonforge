@@ -12,7 +12,7 @@ on:
       - '**.md'
 jobs:
   build:
-    if: ${{ vars.DL_DIR && vars.SSTATE_DIR }}
+    if: github.event.repository.fork == false
     runs-on: self-hosted
     strategy:
       matrix:
