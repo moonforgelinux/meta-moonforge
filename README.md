@@ -1,6 +1,6 @@
 # meta-moonforge
 
-[Moonforge](https://moonforgelinux.org/) is an open-source collection of [Yocto](https://moonforgelinux.org/docs/) layers and build tooling maintained by [Igalia](https://www.igalia.com/). It gives system integrators and product teams a production-ready starting point for building custom, immutable embedded Linux operating systems, without duplicating the integration work that every project ends up doing from scratch.
+[Moonforge](https://moonforgelinux.org/) is an open-source collection of [various Yocto layers](https://moonforgelinux.org/docs/) and build tooling maintained by [Igalia](https://www.igalia.com/). It gives system integrators and product teams a production-ready starting point for building custom, immutable embedded Linux operating systems, without duplicating the integration work that every project ends up doing from scratch.
 
 ## Setup
 
