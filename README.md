@@ -1,13 +1,6 @@
 # meta-moonforge
 
-Moonforge is a reliable platform to deploy applications and build products. More concretely:
-
-* A stable Linux distribution.
-* A set of reusable building blocks.
-* A solid base to build derivative products.
-* A collection of the industry best practices.
-
-Built on top of LTS releases of the [Yocto project](https://www.yoctoproject.org/), Moonforge provides essential features like reproducible builds, cross-compilation, generation of compliance reports, and more. Additionally, it provides guidance on how to develop, build and release derivative products following industry best practices.
+[Moonforge](https://moonforgelinux.org/) is an open-source collection of [various Yocto layers](https://moonforgelinux.org/docs/) and build tooling maintained by [Igalia](https://www.igalia.com/). It gives system integrators and product teams a production-ready starting point for building custom, immutable embedded Linux operating systems, without duplicating the integration work that every project ends up doing from scratch.
 
 ## Setup
 
