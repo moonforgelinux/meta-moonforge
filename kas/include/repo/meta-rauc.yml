@@ -4,5 +4,5 @@ header:
 repos:
   meta-rauc:
     url: https://github.com/rauc/meta-rauc
-    commit: a0f4a8b9986954239850b9d4256c003c91e6b931
+    commit: d63878f20eba7a85ecf53566e7a3377e78bb46ac
     branch: scarthgap
