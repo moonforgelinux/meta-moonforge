@@ -4,5 +4,5 @@ header:
 repos:
   bitbake:
     url: https://git.openembedded.org/bitbake
-    commit: d3b4c352dd33fca90cd31649eda054b884478739
-    tag: yocto-5.0.17
+    commit: a2dd9be788274d9c7280be5b1be5eb5c3990cf54
+    branch: '2.18'

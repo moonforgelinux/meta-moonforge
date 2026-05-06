@@ -1,4 +1,4 @@
-part /boot --source bootimg-efi --sourceparams="loader=grub-efi" --ondisk sda --label msdos --active --align 1024 --use-uuid
+part /boot --source bootimg_efi --sourceparams="loader=grub-efi" --ondisk sda --label msdos --active --align 1024 --use-uuid
 part / --source rootfs --ondisk sda --fstype=ext4 --label platform --align 1024 --use-uuid
 part /data --ondisk sda --fstype=ext4 --size "${IMAGE_DATA_MIN_SIZE}" --label data --align 1024
 part swap --ondisk sda --size 44 --label swap1 --fstype=swap --use-uuid
