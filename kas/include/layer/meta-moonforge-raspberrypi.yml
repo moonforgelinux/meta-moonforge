@@ -1,7 +1,6 @@
 header:
   version: 16
   includes:
-    - kas/include/repo/meta-lts-mixins.yml
     - kas/include/repo/meta-raspberrypi.yml
     - kas/include/layer/meta-moonforge-distro.yml
 

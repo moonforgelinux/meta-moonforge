@@ -5,5 +5,5 @@ SRC_URI += " \
 "
 
 do_install:append() {
-	install -m 0644 ${WORKDIR}/framebuf.rules ${D}${sysconfdir}/udev/rules.d/
+	install -m 0644 ${UNPACKDIR}/framebuf.rules ${D}${sysconfdir}/udev/rules.d/
 }
