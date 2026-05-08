@@ -4,4 +4,4 @@ header:
 local_conf_header:
   20_common-cve: |
     # Generate custom CVE report
-    INHERIT += "cve-check cve-report-native"
+    OE_FRAGMENTS += "core/yocto/sbom-cve-check"
