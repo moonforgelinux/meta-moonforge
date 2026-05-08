@@ -4,4 +4,4 @@ header:
 local_conf_header:
   20_common-debug: |
     # Enables common debug features
-    EXTRA_IMAGE_FEATURES += "debug-tweaks"
+    EXTRA_IMAGE_FEATURES += "allow-empty-password allow-root-login empty-root-password post-install-logging"
