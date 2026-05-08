@@ -5,9 +5,11 @@ SRC_URI += " \
     file://container-host-config.conf \
 "
 
+S = "${UNPACKDIR}"
+
 do_install:append() {
-	install ${WORKDIR}/storage.conf ${D}/${sysconfdir}/containers/storage.conf
-	install -Dm644 ${WORKDIR}/container-host-config.conf ${D}${nonarch_libdir}/tmpfiles.d/container-host-config.conf
+	install ${UNPACKDIR}/storage.conf ${D}/${sysconfdir}/containers/storage.conf
+	install -Dm644 ${UNPACKDIR}/container-host-config.conf ${D}${nonarch_libdir}/tmpfiles.d/container-host-config.conf
 }
 
 FILES:${PN} += " \
