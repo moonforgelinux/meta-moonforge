@@ -6,7 +6,7 @@ SRC_URI += " \
 "
 
 do_install:append() {
-	install -Dm644 ${WORKDIR}/background.png ${D}${datadir}/background.png
+	install -Dm644 ${UNPACKDIR}/background.png ${D}${datadir}/background.png
 }
 
 FILES:${PN} += " \
