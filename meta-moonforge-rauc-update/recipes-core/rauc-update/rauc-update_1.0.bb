@@ -15,7 +15,7 @@ SRC_URI += " \
         file://rauc-update.timer \
 "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 inherit systemd
 
@@ -38,9 +38,9 @@ do_compile () {
 }
 
 do_install () {
-        install -Dm 0755 ${WORKDIR}/rauc-update ${D}${bindir}/rauc-update
-        install -Dm 0644 ${WORKDIR}/rauc-update.service ${D}${systemd_unitdir}/system/rauc-update.service
-        install -Dm 0644 ${WORKDIR}/rauc-update.timer ${D}${systemd_unitdir}/system/rauc-update.timer
+        install -Dm 0755 ${UNPACKDIR}/rauc-update ${D}${bindir}/rauc-update
+        install -Dm 0644 ${UNPACKDIR}/rauc-update.service ${D}${systemd_unitdir}/system/rauc-update.service
+        install -Dm 0644 ${UNPACKDIR}/rauc-update.timer ${D}${systemd_unitdir}/system/rauc-update.timer
 }
 
 FILES:${PN} = " \
