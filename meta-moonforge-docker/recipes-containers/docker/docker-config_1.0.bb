@@ -13,8 +13,10 @@ SRC_URI = " \
     file://daemon.json \
 "
 
+S = "${UNPACKDIR}"
+
 do_install() {
-	install -Dm644 ${WORKDIR}/daemon.json ${D}${sysconfdir}/docker/daemon.json
+	install -Dm644 ${UNPACKDIR}/daemon.json ${D}${sysconfdir}/docker/daemon.json
 }
 
 FILES:${PN} = " \

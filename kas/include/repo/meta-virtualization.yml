@@ -4,5 +4,5 @@ header:
 repos:
   meta-virtualization:
     url: https://git.yoctoproject.org/meta-virtualization
-    commit: 3dd635f613f7299d986a8ab6bc9f584370f8ed1d
-    branch: scarthgap
+    commit: 4ba5825ee16fcded87f4d555b4ed7a7615dc67ac
+    branch: master
