@@ -4,5 +4,5 @@ header:
 repos:
   meta-rauc:
     url: https://github.com/rauc/meta-rauc
-    commit: d63878f20eba7a85ecf53566e7a3377e78bb46ac
-    branch: scarthgap
+    commit: 01f7e1bbde162263bcfb93fd5a3bcdd1483f688c
+    branch: wrynose
