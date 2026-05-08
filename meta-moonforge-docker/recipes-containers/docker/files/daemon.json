@@ -1,3 +1,4 @@
 {
-  "data-root": "/data/containers/docker"
+  "data-root": "/data/containers/docker",
+  "storage-driver": "overlay2"
 }
