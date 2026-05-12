@@ -10,4 +10,6 @@ local_conf_header:
     PACKAGECONFIG:remove:pn-gawk = "readline"
     PACKAGECONFIG:remove:pn-nftables = "readline"
     PACKAGECONFIG:remove:pn-parted = "readline"
+    PACKAGECONFIG:remove:pn-perl = "gdbm"
+    PACKAGECONFIG:remove:pn-python3 = "gdbm"
     MACHINE_ESSENTIAL_EXTRA_RDEPENDS:remove = "tar"
