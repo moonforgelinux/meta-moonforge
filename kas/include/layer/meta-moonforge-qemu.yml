@@ -3,6 +3,10 @@ header:
   includes:
     - kas/include/layer/meta-moonforge-distro.yml
 
+local_conf_header:
+  20_meta-moonforge-qemu: |
+    WKS_FILE_DEPENDS:remove = "systemd-boot"
+
 repos:
   meta-moonforge:
     layers:
