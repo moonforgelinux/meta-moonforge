@@ -7,4 +7,7 @@ local_conf_header:
     INCOMPATIBLE_LICENSE:pn-moonforge-image-base += "GPL-3.0* LGPL-3.0* AGPL-3.0*"
     BAD_RECOMMENDATIONS:pn-moonforge-image-base += "kbd-keymaps-pine gpgme-tool dosfstools"
     PACKAGECONFIG:remove:pn-bluez5 = "readline"
+    PACKAGECONFIG:remove:pn-gawk = "readline"
+    PACKAGECONFIG:remove:pn-nftables = "readline"
+    PACKAGECONFIG:remove:pn-parted = "readline"
     MACHINE_ESSENTIAL_EXTRA_RDEPENDS:remove = "tar"
