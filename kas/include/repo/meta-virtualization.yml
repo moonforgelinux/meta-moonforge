@@ -4,5 +4,5 @@ header:
 repos:
   meta-virtualization:
     url: https://git.yoctoproject.org/meta-virtualization
-    commit: 4ba5825ee16fcded87f4d555b4ed7a7615dc67ac
-    branch: master
+    commit: e1bdfe90563487f0a3253cd4b0d5bb7fa5194d83
+    branch: wrynose
