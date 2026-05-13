@@ -5,7 +5,7 @@ repos:
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
     commit: 42fa856a00ac16b2a7a83d7ecfa60a5be192b16c
-    branch: wrynose
+    tag: yocto-6.0
     patches:
       fix-volatile-binds:
         repo: meta-moonforge
