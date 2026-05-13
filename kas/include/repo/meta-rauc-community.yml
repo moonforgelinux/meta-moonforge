@@ -6,3 +6,7 @@ repos:
     url: https://github.com/rauc/meta-rauc-community
     commit: 2418b23a82c555f6b555ad28ac72b60f68c988d8
     branch: master
+    patches:
+      fix-keyring-path:
+        repo: meta-moonforge
+        path: kas/include/repo/patches/meta-rauc-community-fix-keyring-path.patch
