@@ -1,0 +1,142 @@
+From 4adb25d989ea43c4899f5d466307705da124fd47 Mon Sep 17 00:00:00 2001
+From: Martin Abente Lahaye <mabente@igalia.com>
+Date: Wed, 13 May 2026 12:28:48 -0300
+Subject: [PATCH] system.conf: Update keyring path to /usr/lib
+
+This has been updated in meta-rauc to prepare it for hermetic /usr/ [1].
+
+[1] https://github.com/rauc/meta-rauc/commit/01f7e1bbde162263bcfb93fd5a3bcdd1483f688c
+
+Signed-off-by: Martin Abente Lahaye <mabente@igalia.com>
+---
+ .../recipes-core/rauc/files/beaglebone-ai64/system.conf         | 2 +-
+ .../recipes-core/rauc/files/beaglebone-yocto/system.conf        | 2 +-
+ .../recipes-core/rauc/files/beaglebone/system.conf              | 2 +-
+ .../recipes-core/rauc/files/pocketbeagle2/system.conf           | 2 +-
+ .../recipes-core/rauc/files/genericx86-64/system.conf           | 2 +-
+ meta-rauc-nxp/recipes-core/rauc/files/system.conf               | 2 +-
+ meta-rauc-raspberrypi/recipes-core/rauc/files/system.conf       | 2 +-
+ meta-rauc-rockchip/recipes-core/rauc/files/system.conf          | 2 +-
+ meta-rauc-sunxi/recipes-core/rauc/files/system.conf             | 2 +-
+ 9 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-ai64/system.conf b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-ai64/system.conf
+index 07711ef..edc5c4f 100644
+--- a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-ai64/system.conf
++++ b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-ai64/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+ 
+ [slot.rootfs.0]
+ device=/dev/mmcblk1p2
+diff --git a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-yocto/system.conf b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-yocto/system.conf
+index bd8568b..e5e8779 100644
+--- a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-yocto/system.conf
++++ b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone-yocto/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk0p2
+diff --git a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone/system.conf b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone/system.conf
+index bd8568b..e5e8779 100644
+--- a/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone/system.conf
++++ b/meta-rauc-beaglebone/recipes-core/rauc/files/beaglebone/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk0p2
+diff --git a/meta-rauc-beaglebone/recipes-core/rauc/files/pocketbeagle2/system.conf b/meta-rauc-beaglebone/recipes-core/rauc/files/pocketbeagle2/system.conf
+index 9c64726..47f3f01 100644
+--- a/meta-rauc-beaglebone/recipes-core/rauc/files/pocketbeagle2/system.conf
++++ b/meta-rauc-beaglebone/recipes-core/rauc/files/pocketbeagle2/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk1p2
+diff --git a/meta-rauc-genericx86-64/recipes-core/rauc/files/genericx86-64/system.conf b/meta-rauc-genericx86-64/recipes-core/rauc/files/genericx86-64/system.conf
+index 0dc73f5..c1317a6 100644
+--- a/meta-rauc-genericx86-64/recipes-core/rauc/files/genericx86-64/system.conf
++++ b/meta-rauc-genericx86-64/recipes-core/rauc/files/genericx86-64/system.conf
+@@ -5,7 +5,7 @@ grubenv=/grubenv/grubenv
+ data-directory=/data/rauc
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+ 
+ [slot.efi.0]
+ device=/dev/sda
+diff --git a/meta-rauc-nxp/recipes-core/rauc/files/system.conf b/meta-rauc-nxp/recipes-core/rauc/files/system.conf
+index 07711ef..edc5c4f 100644
+--- a/meta-rauc-nxp/recipes-core/rauc/files/system.conf
++++ b/meta-rauc-nxp/recipes-core/rauc/files/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+ 
+ [slot.rootfs.0]
+ device=/dev/mmcblk1p2
+diff --git a/meta-rauc-raspberrypi/recipes-core/rauc/files/system.conf b/meta-rauc-raspberrypi/recipes-core/rauc/files/system.conf
+index bd8568b..e5e8779 100644
+--- a/meta-rauc-raspberrypi/recipes-core/rauc/files/system.conf
++++ b/meta-rauc-raspberrypi/recipes-core/rauc/files/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk0p2
+diff --git a/meta-rauc-rockchip/recipes-core/rauc/files/system.conf b/meta-rauc-rockchip/recipes-core/rauc/files/system.conf
+index 9da1aa1..c1a2dde 100644
+--- a/meta-rauc-rockchip/recipes-core/rauc/files/system.conf
++++ b/meta-rauc-rockchip/recipes-core/rauc/files/system.conf
+@@ -4,7 +4,7 @@ bootloader=uboot
+ data-directory=/data/
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk1p10
+diff --git a/meta-rauc-sunxi/recipes-core/rauc/files/system.conf b/meta-rauc-sunxi/recipes-core/rauc/files/system.conf
+index b7ca546..c891d36 100644
+--- a/meta-rauc-sunxi/recipes-core/rauc/files/system.conf
++++ b/meta-rauc-sunxi/recipes-core/rauc/files/system.conf
+@@ -3,7 +3,7 @@ compatible=@@MACHINE@@
+ bootloader=uboot
+ 
+ [keyring]
+-path=/etc/rauc/ca.cert.pem
++path=/usr/lib/rauc/ca.cert.pem
+  
+ [slot.rootfs.0]
+ device=/dev/mmcblk0p2
+-- 
+2.54.0
+
