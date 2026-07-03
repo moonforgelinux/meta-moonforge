@@ -14,7 +14,7 @@ SRC_URI = " \
     file://wayland-cog-launch.service \
 "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 inherit systemd
 
@@ -34,8 +34,8 @@ do_compile () {
 }
 
 do_install () {
-	install -Dm755 ${WORKDIR}/wayland-cog-launch ${D}${bindir}/wayland-cog-launch
-	install -Dm644 ${WORKDIR}/wayland-cog-launch.service ${D}${systemd_unitdir}/system/wayland-cog-launch.service
+	install -Dm755 ${UNPACKDIR}/wayland-cog-launch ${D}${bindir}/wayland-cog-launch
+	install -Dm644 ${UNPACKDIR}/wayland-cog-launch.service ${D}${systemd_unitdir}/system/wayland-cog-launch.service
 }
 
 FILES:${PN} = " \
