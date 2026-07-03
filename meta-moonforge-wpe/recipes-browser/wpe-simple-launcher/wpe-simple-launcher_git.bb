@@ -21,8 +21,6 @@ SRC_URI = "git://github.com/psaavedra/wpe-simple-launcher.git;protocol=https;bra
           "
 SRCREV = "2cf23df0fbb8c02d9f936365cc2d86350bbf3ec0"
 
-S = "${WORKDIR}/git"
-
 SYSTEMD_PACKAGES = "wpe-simple-launcher"
 SYSTEMD_SERVICE:${PN} = "wpe-simple-launcher.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
@@ -30,13 +28,13 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 WPE_SIMPLE_LAUNCHER_URL ?= "https://www.moonforgelinux.org"
 
 do_compile:append () {
-    sed -e "s|@wpe-simple-launcher-url@|${WPE_SIMPLE_LAUNCHER_URL}|g" ${WORKDIR}/wpe-simple-launcher.service.in > ${WORKDIR}/wpe-simple-launcher.service
+    sed -e "s|@wpe-simple-launcher-url@|${WPE_SIMPLE_LAUNCHER_URL}|g" ${UNPACKDIR}/wpe-simple-launcher.service.in > ${UNPACKDIR}/wpe-simple-launcher.service
 }
 
 do_install:append () {
     install -d ${D}/${bindir}/
     install -m 755 ${B}/wpe-simple-launcher ${D}/${bindir}/wpe-simple-launcher
-    install -m 755 ${WORKDIR}/wpe-ctl ${D}/${bindir}/wpe-ctl
-    install -m 755 ${WORKDIR}/wpe-exported-wayland ${D}/${bindir}/wpe-exported-wayland
-    install -Dm644 ${WORKDIR}/wpe-simple-launcher.service ${D}${systemd_unitdir}/system/wpe-simple-launcher.service
+    install -m 755 ${UNPACKDIR}/wpe-ctl ${D}/${bindir}/wpe-ctl
+    install -m 755 ${UNPACKDIR}/wpe-exported-wayland ${D}/${bindir}/wpe-exported-wayland
+    install -Dm644 ${UNPACKDIR}/wpe-simple-launcher.service ${D}${systemd_unitdir}/system/wpe-simple-launcher.service
 }
