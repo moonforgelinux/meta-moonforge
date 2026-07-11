@@ -6,6 +6,7 @@ header:
 local_conf_header:
   20_meta-moonforge-graphics: |
     DISTRO_FEATURES:append = " pam wayland opengl"
+    DISTRO_FEATURES:remove = " vulkan"
 
 repos:
   meta-moonforge:
