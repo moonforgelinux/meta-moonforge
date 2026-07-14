@@ -6,6 +6,9 @@ header:
 local_conf_header:
   20_meta-moonforge-graphics: |
     DISTRO_FEATURES:append = " pam wayland opengl"
+    DISTRO_FEATURES:remove = " vulkan"
+    PREFERRED_VERSION_mesa = "25.0.2"
+    PACKAGECONFIG:append:pn-mesa = " gallium vc4 v3d  x11"
 
 repos:
   meta-moonforge:
