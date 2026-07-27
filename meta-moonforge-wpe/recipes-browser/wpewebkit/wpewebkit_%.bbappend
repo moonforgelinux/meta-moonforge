@@ -1,0 +1,1 @@
+PACKAGECONFIG:append = " wpe-platform"

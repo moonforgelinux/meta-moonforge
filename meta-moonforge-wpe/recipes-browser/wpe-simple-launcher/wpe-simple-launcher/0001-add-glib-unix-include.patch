@@ -1,0 +1,26 @@
+From 6406645c7d94a9cd39727264c40bad8376987353 Mon Sep 17 00:00:00 2001
+From: Martin Abente Lahaye <mabente@igalia.com>
+Date: Mon, 27 Jul 2026 15:04:26 -0300
+Subject: [PATCH] Fix g_unix_signal_add declaration
+
+Upstream-Status: Pending
+
+---
+ main.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/main.c b/main.c
+index 5eacdbc..ddc3e5c 100644
+--- a/main.c
++++ b/main.c
+@@ -4,6 +4,7 @@
+ #include <gio/gio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <glib-unix.h>
+ 
+ #define WPE_SIMPLE_LAUNCHER_VERSION_MAJOR 1
+ #define WPE_SIMPLE_LAUNCHER_VERSION_MINOR 0
+-- 
+2.54.0
+
