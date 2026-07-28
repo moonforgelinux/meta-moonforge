@@ -1,0 +1,12 @@
+[Unit]
+Description=Simple WPE launcher for Weston
+After=network-online.target
+Wants=network-online.target
+After=weston.service
+
+[Service]
+ExecStart=/usr/bin/wpe-exported-wayland @wpe-simple-launcher-url@ --fullscreen
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
