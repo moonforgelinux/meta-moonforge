@@ -4,8 +4,8 @@ header:
 repos:
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
-    commit: 52380df998b3a8fe6a091f8547434a3231320a8e
-    tag: yocto-5.0.17
+    commit: 2814f0962f56c8d1afa4de76d2895ba9b5cb767d
+    tag: yocto-5.0.19
     patches:
       fix-volatile-binds:
         repo: meta-moonforge
