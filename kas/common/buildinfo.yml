@@ -1,0 +1,11 @@
+header:
+  version: 16
+
+local_conf_header:
+  20_common-buildinfo: |
+    # Add build information in the image (/etc/buildinfo)
+    INHERIT += "image-buildinfo"
+    IMAGE_BUILDINFO_VARS:append = " DISTRO_NAME IMAGE_BASENAME MACHINE TUNE_PKGARCH"
+    IMAGE_BUILDINFO_VARS:append = " MACHINE_FEATURES DISTRO_FEATURES IMAGE_FEATURES"
+    IMAGE_BUILDINFO_VARS:append = " TUNE_FEATURES TARGET_FPU"
+

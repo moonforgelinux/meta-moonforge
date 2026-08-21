@@ -49,6 +49,7 @@ This repository contains [example kas files](./kas/examples) for building differ
 Additionally, it contains [auxiliary kas fragments](./kas/common) useful for common tasks while developing locally or in continuous integration environments. For example:
 
 * *kas/common/debug.yml* disables the root password to facilitate testing.
+* *kas/common/buildinfo.yml* adds build information (features, machine, distro) to */etc/buildinfo* in the image.
 * *kas/common/cve.yml* enables the generation of the [Common Vulnerabilities and Exposures](https://www.cve.org/) (CVE) report.
 * *kas/common/sbom.yml* enables the generation of the [Software Bill of Materials](https://www.cisa.gov/sbom) (SBOM) report.
 * *kas/common/throttle.yml* limits the amount of system resources used by bitbake and the build environment, useful when building demanding recipes.
