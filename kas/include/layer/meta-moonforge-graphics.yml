@@ -1,13 +1,17 @@
 header:
   version: 16
   includes:
+    - kas/include/repo/meta-openembedded.yml
     - kas/include/layer/meta-moonforge-distro.yml
 
 local_conf_header:
   20_meta-moonforge-graphics: |
-    DISTRO_FEATURES:append = " pam wayland opengl"
+    DISTRO_FEATURES:append = " opengl pam polkit wayland"
 
 repos:
   meta-moonforge:
     layers:
       meta-moonforge-graphics:
+  meta-openembedded:
+    layers:
+      meta-oe:
