@@ -6,6 +6,7 @@ header:
 local_conf_header:
   20_meta-moonforge-rauc: |
     DISTRO_FEATURES:append = " rauc"
+    require conf/fragments/moonforge-rauc.conf
 
 repos:
   meta-moonforge:
