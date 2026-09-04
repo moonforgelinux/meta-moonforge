@@ -8,6 +8,7 @@ header:
 local_conf_header:
   20_meta-moonforge-wpe: |
     PREFERRED_PROVIDER_virtual/wpebackend = "wpebackend-fdo"
+    require conf/fragments/moonforge-wpe.conf
 
 repos:
   meta-moonforge:
