@@ -9,7 +9,7 @@ header:
 
 local_conf_header:
   30_meta-moonforge-wpe: |
-    WAYLAND_COG_LAUNCH_URL = "https://www.igalia.com"
+    WPE_SIMPLE_LAUNCHER_URL = "https://wpewebkit.org"
   20_meta-moonforge-qemu: |
     # Specifies description file for partitioning the image
     WKS_FILE = "moonforge-image-base-qemux86-64.wks.in"
