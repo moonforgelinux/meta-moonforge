@@ -4,5 +4,5 @@ header:
 repos:
   meta-webkit:
     url: https://github.com/Igalia/meta-webkit.git
-    commit: 2d29669a3d78e462276044f3f8bde0e4dec33696
-    branch: scarthgap
+    commit: 019e1c46dbd6778635580657ea28b779d3d2f211
+    branch: scarthgap-latest
