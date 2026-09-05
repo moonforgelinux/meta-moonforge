@@ -8,6 +8,7 @@ header:
 local_conf_header:
   20_meta-moonforge-podman: |
     DISTRO_FEATURES:append = " virtualization seccomp"
+    require conf/fragments/moonforge-podman.conf
 
 repos:
   meta-moonforge:

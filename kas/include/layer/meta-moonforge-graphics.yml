@@ -7,6 +7,7 @@ header:
 local_conf_header:
   20_meta-moonforge-graphics: |
     DISTRO_FEATURES:append = " opengl pam polkit wayland"
+    require conf/fragments/moonforge-graphics.conf
 
 repos:
   meta-moonforge:

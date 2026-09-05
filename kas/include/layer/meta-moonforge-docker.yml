@@ -8,6 +8,7 @@ header:
 local_conf_header:
   20_meta-moonforge-docker: |
     DISTRO_FEATURES:append = " virtualization"
+    require conf/fragments/moonforge-docker.conf
 
 repos:
   meta-moonforge:
