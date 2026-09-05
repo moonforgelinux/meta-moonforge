@@ -7,6 +7,7 @@ header:
 local_conf_header:
   30_meta-moonforge-rauc-raspberrypi: |
     # Extra RAUC configurations for the Raspberry Pi here
+    RPI_EXTRA_IMAGE_BOOT_FILES:remove = "${KERNEL_IMAGETYPE}"
 
 repos:
   meta-rauc-community:
