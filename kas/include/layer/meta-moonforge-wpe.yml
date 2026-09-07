@@ -8,6 +8,9 @@ header:
 local_conf_header:
   20_meta-moonforge-wpe: |
     PREFERRED_PROVIDER_virtual/wpebackend = "wpebackend-fdo"
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        wpe-simple-launcher \
+    "
 
 repos:
   meta-moonforge:
