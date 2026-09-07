@@ -7,6 +7,9 @@ local_conf_header:
   30_meta-moonforge-rauc-update: |
     RAUC_BUNDLE_URL ?= "https://localhost/ota/${IMAGE_ID}/LATEST.raucb"
     RAUC_FORCE_REBOOT_ON_UPDATE ?= "1"
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        rauc-update \
+    "
 
 repos:
   meta-moonforge:
