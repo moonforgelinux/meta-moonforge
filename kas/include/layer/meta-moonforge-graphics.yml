@@ -7,6 +7,14 @@ header:
 local_conf_header:
   20_meta-moonforge-graphics: |
     DISTRO_FEATURES:append = " opengl pam polkit wayland"
+    IMAGE_FEATURES += " \
+        weston \
+    "
+
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        polkit \
+        gsettings-desktop-schemas \
+    "
 
 repos:
   meta-moonforge:
