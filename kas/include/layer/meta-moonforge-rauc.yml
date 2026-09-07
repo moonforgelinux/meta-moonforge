@@ -6,6 +6,11 @@ header:
 local_conf_header:
   20_meta-moonforge-rauc: |
     DISTRO_FEATURES:append = " rauc"
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        kernel-image \
+        kernel-modules \
+        rauc \
+    "
 
 repos:
   meta-moonforge:
