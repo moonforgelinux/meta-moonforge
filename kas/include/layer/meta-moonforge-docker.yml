@@ -8,6 +8,11 @@ header:
 local_conf_header:
   20_meta-moonforge-docker: |
     DISTRO_FEATURES:append = " virtualization"
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        docker-moby \
+        docker-compose \
+        docker-config \
+    "
 
 repos:
   meta-moonforge:
