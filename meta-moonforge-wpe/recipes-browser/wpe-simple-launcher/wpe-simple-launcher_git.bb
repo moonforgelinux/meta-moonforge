@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/psaavedra/wpe-simple-launcher.git;protocol=https;bra
            file://wpe-exported-wayland \
            file://wpe-simple-launcher.service.in \
           "
-SRCREV = "522488025d1e68d039667bd897b3e8f4ee820061"
+SRCREV = "2cf23df0fbb8c02d9f936365cc2d86350bbf3ec0"
 
 S = "${WORKDIR}/git"
 
