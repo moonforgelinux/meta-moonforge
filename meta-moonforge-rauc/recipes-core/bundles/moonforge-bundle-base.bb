@@ -3,6 +3,12 @@
 # SPDX-FileCopyrightText: 2025 Igalia S.L.
 #
 
+SUMMARY = "RAUC bundle wrapping the base Moonforge image"
+DESCRIPTION = "Packs moonforge-image-base into a verity-format RAUC bundle that \
+the A/B update flow installs into the rootfs slot."
+HOMEPAGE = "https://github.com/moonforgelinux/meta-moonforge"
+LICENSE = "MIT"
+
 inherit bundle
 
 RAUC_BUNDLE_COMPATIBLE = "${MACHINE}"
