@@ -15,7 +15,7 @@ OVERLAYFS_ETC_FSTYPE ?= "ext4"
 inherit core-image
 
 # Set common features
-IMAGE_FEATURES += " \
+IMAGE_FEATURES += "\
     splash \
     read-only-rootfs \
     overlayfs-etc \

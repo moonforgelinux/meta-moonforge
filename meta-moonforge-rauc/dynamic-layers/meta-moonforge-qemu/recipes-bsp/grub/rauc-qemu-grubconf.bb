@@ -12,7 +12,7 @@ include conf/image-uefi.conf
 
 RPROVIDES:${PN} += "virtual-grub-bootconf"
 
-SRC_URI += " \
+SRC_URI += "\
     file://grub.cfg \
     file://grubenv \
     "

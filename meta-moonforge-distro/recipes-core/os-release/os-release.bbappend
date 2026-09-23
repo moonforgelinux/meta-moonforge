@@ -3,12 +3,12 @@
 # SPDX-FileCopyrightText: 2025 Igalia S.L.
 #
 
-OS_RELEASE_FIELDS += " \
+OS_RELEASE_FIELDS += "\
     IMAGE_ID \
     IMAGE_VERSION \
 "
 
-OS_RELEASE_UNQUOTED_FIELDS += " \
+OS_RELEASE_UNQUOTED_FIELDS += "\
     IMAGE_ID \
     IMAGE_VERSION \
 "
