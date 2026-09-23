@@ -10,8 +10,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 include conf/image-uefi.conf
 
-RPROVIDES:${PN} += "virtual-grub-bootconf"
-
 SRC_URI += "\
     file://grub.cfg \
     file://grubenv \
@@ -19,14 +17,16 @@ SRC_URI += "\
 
 S = "${WORKDIR}"
 
+FILES:${PN} += "${EFI_FILES_PATH}"
+
+RPROVIDES:${PN} += "virtual-grub-bootconf"
+
 inherit deploy
 
 do_install() {
         install -d ${D}${EFI_FILES_PATH}
         install -m 644 ${WORKDIR}/grub.cfg ${D}${EFI_FILES_PATH}/grub.cfg
 }
-
-FILES:${PN} += "${EFI_FILES_PATH}"
 
 do_deploy() {
     install -m 644 ${WORKDIR}/grub.cfg ${DEPLOYDIR}
