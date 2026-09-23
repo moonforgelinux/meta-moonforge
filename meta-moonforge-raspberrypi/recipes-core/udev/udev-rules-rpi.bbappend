@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI += " \
+SRC_URI += "\
     file://framebuf.rules \
 "
 

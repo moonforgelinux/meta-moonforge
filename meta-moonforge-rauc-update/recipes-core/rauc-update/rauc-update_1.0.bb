@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI += " \
+SRC_URI += "\
         file://rauc-update \
         file://rauc-update.service.in \
         file://rauc-update.timer \
@@ -23,7 +23,7 @@ SYSTEMD_PACKAGES = "rauc-update"
 SYSTEMD_SERVICE:${PN} = "rauc-update.timer"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
-RDEPENDS:${PN} += " \
+RDEPENDS:${PN} += "\
         rauc \
         systemd \
 "

@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI += " \
+SRC_URI += "\
     file://storage.conf \
     file://container-host-config.conf \
 "
@@ -10,7 +10,7 @@ do_install:append() {
 	install -Dm644 ${WORKDIR}/container-host-config.conf ${D}${nonarch_libdir}/tmpfiles.d/container-host-config.conf
 }
 
-FILES:${PN} += " \
+FILES:${PN} += "\
     ${sysconfdir}/containers/storage.conf \
     ${nonarch_libdir}/tmpfiles.d/container-host-config.conf \
 "
