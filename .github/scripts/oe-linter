@@ -51,8 +51,40 @@ if [ -t 1 ]; then
     ARG_COLOR="--color"
 fi
 
+# Rules that do not fit these layers. Every entry here is a deliberate decision
+# rather than a pending cleanup, so it comes with the reason it is disabled:
+#
+#   vars.noncoreoverride    The meta-moonforge-* bbappends belong to a distro
+#                           and are meant to apply whenever their layer is
+#                           active. Which ones that is gets decided by the kas
+#                           fragments, not by MACHINE/DISTRO overrides inside
+#                           the recipes.
+#   var.licenseremotefile   Recipes with no upstream tarball point
+#                           LIC_FILES_CHKSUM at ${COMMON_LICENSE_DIR}, the same
+#                           way openembedded-core does for its own recipes.
+#   var.filesoverride       Assigning FILES:${PN} is ordinary packaging for the
+#                           config files these recipes install.
+#   bbclass.underscores     Renaming moonforge-image.bbclass would break every
+#                           'inherit' of it and the distro conf; note that
+#                           openembedded-core itself ships core-image.bbclass.
+#   file.underscores        rauc-qemu-grubconf.bb and moonforge-bundle-base.bb
+#                           carry no version, matching how meta-rauc names its
+#                           own bundle recipes.
+#   task.noanonpython       The anonymous python in cve-report-native.bbclass is
+#                           a bb.parse.SkipRecipe guard, which has no
+#                           non-anonymous equivalent.
+#   var.mandatoryvar.SRC_URI  Image and RAUC bundle recipes are assembled out of
+#                           other recipes and have nothing to fetch.
+OELINT_SUPPRESS="oelint.bbclass.underscores \
+oelint.file.underscores \
+oelint.task.noanonpython \
+oelint.var.filesoverride \
+oelint.var.licenseremotefile \
+oelint.var.mandatoryvar.SRC_URI \
+oelint.vars.noncoreoverride"
+
 # shellcheck disable=SC2086
 $OELINT_ADV_BIN $ARG_COLOR --hide info \
-    --suppress "oelint.task.heredocs oelint.vars.mispell" \
+    --suppress "$OELINT_SUPPRESS" \
     --release scarthgap \
     $OELINT_FILES
