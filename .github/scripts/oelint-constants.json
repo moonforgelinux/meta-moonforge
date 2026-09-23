@@ -1,0 +1,17 @@
+{
+  "variables": {
+    "known": [
+      "OS_RELEASE_FIELDS",
+      "OS_RELEASE_UNQUOTED_FIELDS",
+      "RAUC_BUNDLE_COMPATIBLE",
+      "RAUC_BUNDLE_DESCRIPTION",
+      "RAUC_BUNDLE_FORMAT",
+      "RAUC_BUNDLE_SLOTS",
+      "RAUC_BUNDLE_VERSION",
+      "RAUC_SLOT_rootfs",
+      "SPLASH_IMAGES",
+      "VOLATILE_BINDS",
+      "dirs755"
+    ]
+  }
+}

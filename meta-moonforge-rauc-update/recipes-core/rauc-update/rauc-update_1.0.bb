@@ -4,12 +4,14 @@
 #
 
 SUMMARY = "Updates the system using RAUC"
+DESCRIPTION = "Provides the rauc-update helper together with the systemd service \
+and timer that periodically fetch and install a RAUC bundle from the configured \
+bundle URL."
+HOMEPAGE = "https://github.com/moonforgelinux/meta-moonforge"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-
-SRC_URI += " \
+SRC_URI += "\
         file://rauc-update \
         file://rauc-update.service.in \
         file://rauc-update.timer \
@@ -23,7 +25,13 @@ SYSTEMD_PACKAGES = "rauc-update"
 SYSTEMD_SERVICE:${PN} = "rauc-update.timer"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
-RDEPENDS:${PN} += " \
+FILES:${PN} = " \
+        ${bindir}/rauc-update \
+        ${systemd_unitdir}/system/rauc-update.service \
+        ${systemd_unitdir}/system/rauc-update.timer \
+"
+
+RDEPENDS:${PN} += "\
         rauc \
         systemd \
 "
@@ -42,9 +50,3 @@ do_install () {
         install -Dm 0644 ${WORKDIR}/rauc-update.service ${D}${systemd_unitdir}/system/rauc-update.service
         install -Dm 0644 ${WORKDIR}/rauc-update.timer ${D}${systemd_unitdir}/system/rauc-update.timer
 }
-
-FILES:${PN} = " \
-        ${bindir}/rauc-update \
-        ${systemd_unitdir}/system/rauc-update.service \
-        ${systemd_unitdir}/system/rauc-update.timer \
-"

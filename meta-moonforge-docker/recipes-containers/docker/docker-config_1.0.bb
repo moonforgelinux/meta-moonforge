@@ -4,17 +4,18 @@
 #
 
 SUMMARY = "Provides a configuration file with moonforge settings"
+DESCRIPTION = "Installs the Docker daemon configuration (daemon.json) that \
+Moonforge images ship in /etc/docker."
+HOMEPAGE = "https://github.com/moonforgelinux/meta-moonforge"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = " \
     file://daemon.json \
 "
 
 do_install() {
-	install -Dm644 ${WORKDIR}/daemon.json ${D}${sysconfdir}/docker/daemon.json
+    install -Dm644 ${WORKDIR}/daemon.json ${D}${sysconfdir}/docker/daemon.json
 }
 
 FILES:${PN} = " \

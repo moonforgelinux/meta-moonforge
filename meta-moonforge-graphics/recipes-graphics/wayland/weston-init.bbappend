@@ -1,14 +1,14 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI += " \
+SRC_URI += "\
     file://weston.ini \
     file://background.png \
 "
 
 do_install:append() {
-	install -Dm644 ${WORKDIR}/background.png ${D}${datadir}/background.png
+    install -Dm644 ${WORKDIR}/background.png ${D}${datadir}/background.png
 }
 
-FILES:${PN} += " \
+FILES:${PN} += "\
     ${datadir}/background.png \
 "

@@ -1,0 +1,100 @@
+#!/bin/sh
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2026 Igalia S.L.
+set -e
+
+# Version of oelint-adv the layers are linted against. Pinned so that CI and
+# local runs agree: a different version changes which rules fire.
+OELINT_ADV_VERSION="9.6.1"
+
+# Install oelint-adv, unless the pinned version is already there. pipx reports
+# success without doing anything when some other version is installed, so the
+# version has to be checked here for the pin to take effect.
+OELINT_ADV_INSTALLED=$(oelint-adv --version 2>/dev/null | awk '{print $NF}' || true)
+if [ "$OELINT_ADV_INSTALLED" != "$OELINT_ADV_VERSION" ]; then
+    pipx install --force "oelint-adv==$OELINT_ADV_VERSION" || { echo "pipx failed, trying pip..."; pip install --no-cache-dir "oelint-adv==$OELINT_ADV_VERSION" || exit 1; }
+fi
+
+# Find all relevant files under the meta-moonforge-* layers only, store in an
+# array to handle spaces. Other directories checked out at the repo root
+# (openembedded-core, meta-openembedded, meta-webkit, ...) are pinned upstream
+# layers, not ours to lint.
+if [ -z "$OELINT_FILES" ]; then
+    OELINT_FILES=$(find ./meta-moonforge-*/ -type f \( \
+      -name "*.bb" -o \
+      -name "*.bbappend" -o \
+      -name "*.bbclass" \
+    \) 2>/dev/null | sort -u)
+fi
+
+# If no files are found, exit early
+if [ -z "$OELINT_FILES" ]; then
+  echo "No matching files found."
+  exit 0
+fi
+
+# Resolve oelint-adv absolute path via pipx for robustness
+OELINT_ADV_BIN=$(pipx list | awk '/oelint-adv/ {getline; print $2 "/oelint-adv"}' | head -n1)
+if [ ! -x "$OELINT_ADV_BIN" ]; then
+  # fallback: assume it's on PATH
+  OELINT_ADV_BIN=$(command -v oelint-adv)
+fi
+
+if [ -z "$OELINT_ADV_BIN" ]; then
+  echo "oelint-adv command not found."
+  exit 1
+fi
+
+# Decide on color argument for terminal usage
+ARG_COLOR=""
+if [ -t 1 ]; then
+    ARG_COLOR="--color"
+fi
+
+# Rules that do not fit these layers. Every entry here is a deliberate decision
+# rather than a pending cleanup, so it comes with the reason it is disabled.
+# Findings that are a one-off exception rather than a rule-wide mismatch carry a
+# '# nooelint: <rule>' mark at the line itself instead of an entry here.
+#
+#   vars.noncoreoverride    The meta-moonforge-* bbappends belong to a distro
+#                           and are meant to apply whenever their layer is
+#                           active. Which ones that is gets decided by the kas
+#                           fragments, not by MACHINE/DISTRO overrides inside
+#                           the recipes.
+#   var.licenseremotefile   Recipes with no upstream tarball point
+#                           LIC_FILES_CHKSUM at ${COMMON_LICENSE_DIR}, the same
+#                           way openembedded-core does for its own recipes.
+#   var.filesoverride       Assigning FILES:${PN} is ordinary packaging for the
+#                           config files these recipes install.
+#   bbclass.underscores     Renaming moonforge-image.bbclass would break every
+#                           'inherit' of it and the distro conf; note that
+#                           openembedded-core itself ships core-image.bbclass.
+#   file.underscores        rauc-qemu-grubconf.bb and moonforge-bundle-base.bb
+#                           carry no version, matching how meta-rauc names its
+#                           own bundle recipes.
+#   task.noanonpython       The anonymous python in cve-report-native.bbclass is
+#                           a bb.parse.SkipRecipe guard, which has no
+#                           non-anonymous equivalent.
+#   var.mandatoryvar.SRC_URI  Image and RAUC bundle recipes are assembled out of
+#                           other recipes and have nothing to fetch.
+OELINT_SUPPRESS="oelint.bbclass.underscores \
+oelint.file.underscores \
+oelint.task.noanonpython \
+oelint.var.filesoverride \
+oelint.var.licenseremotefile \
+oelint.var.mandatoryvar.SRC_URI \
+oelint.vars.noncoreoverride"
+
+# Variables the bbappends here set but whose defining recipe or class lives in a
+# layer we deliberately do not lint (openembedded-core, meta-rauc). Without this
+# the misspell rule reports every one of them as an unknown variable, which would
+# drown out a real typo. Teaching it the names instead of disabling the rule
+# keeps that check working for everything else.
+OELINT_CONSTANTS="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/oelint-constants.json"
+
+# shellcheck disable=SC2086
+$OELINT_ADV_BIN $ARG_COLOR --hide info \
+    --suppress "$OELINT_SUPPRESS" \
+    --constantmods "+$OELINT_CONSTANTS" \
+    --release scarthgap \
+    $OELINT_FILES
