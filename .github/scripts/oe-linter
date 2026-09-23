@@ -73,9 +73,14 @@ fi
 #   task.noanonpython       The anonymous python in cve-report-native.bbclass is
 #                           a bb.parse.SkipRecipe guard, which has no
 #                           non-anonymous equivalent.
+#   file.requireinclude     conf/image-uefi.conf lives in openembedded-core,
+#   file.includenotfound    which is outside the meta-moonforge-* files linted
+#                           here, so it can never be resolved from this set.
 #   var.mandatoryvar.SRC_URI  Image and RAUC bundle recipes are assembled out of
 #                           other recipes and have nothing to fetch.
 OELINT_SUPPRESS="oelint.bbclass.underscores \
+oelint.file.includenotfound \
+oelint.file.requireinclude \
 oelint.file.underscores \
 oelint.task.noanonpython \
 oelint.var.filesoverride \
@@ -83,8 +88,16 @@ oelint.var.licenseremotefile \
 oelint.var.mandatoryvar.SRC_URI \
 oelint.vars.noncoreoverride"
 
+# Variables the bbappends here set but whose defining recipe or class lives in a
+# layer we deliberately do not lint (openembedded-core, meta-rauc). Without this
+# the misspell rule reports every one of them as an unknown variable, which would
+# drown out a real typo. Teaching it the names instead of disabling the rule
+# keeps that check working for everything else.
+OELINT_CONSTANTS="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/oelint-constants.json"
+
 # shellcheck disable=SC2086
 $OELINT_ADV_BIN $ARG_COLOR --hide info \
     --suppress "$OELINT_SUPPRESS" \
+    --constantmods "+$OELINT_CONSTANTS" \
     --release scarthgap \
     $OELINT_FILES
