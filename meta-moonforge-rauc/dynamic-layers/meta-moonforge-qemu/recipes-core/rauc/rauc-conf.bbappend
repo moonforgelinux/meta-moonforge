@@ -1,3 +1,3 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-RDEPENDS:${PN} += "grub-editenv e2fsprogs-mke2fs"
+RDEPENDS:${PN} += "e2fsprogs-mke2fs grub-editenv"
