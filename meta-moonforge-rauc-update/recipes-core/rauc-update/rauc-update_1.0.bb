@@ -23,6 +23,12 @@ SYSTEMD_PACKAGES = "rauc-update"
 SYSTEMD_SERVICE:${PN} = "rauc-update.timer"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
+FILES:${PN} = " \
+        ${bindir}/rauc-update \
+        ${systemd_unitdir}/system/rauc-update.service \
+        ${systemd_unitdir}/system/rauc-update.timer \
+"
+
 RDEPENDS:${PN} += "\
         rauc \
         systemd \
@@ -42,9 +48,3 @@ do_install () {
         install -Dm 0644 ${WORKDIR}/rauc-update.service ${D}${systemd_unitdir}/system/rauc-update.service
         install -Dm 0644 ${WORKDIR}/rauc-update.timer ${D}${systemd_unitdir}/system/rauc-update.timer
 }
-
-FILES:${PN} = " \
-        ${bindir}/rauc-update \
-        ${systemd_unitdir}/system/rauc-update.service \
-        ${systemd_unitdir}/system/rauc-update.timer \
-"
