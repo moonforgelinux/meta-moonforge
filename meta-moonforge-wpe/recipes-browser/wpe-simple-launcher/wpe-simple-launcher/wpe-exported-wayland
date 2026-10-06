@@ -59,7 +59,8 @@ export "${XDG_RUNTIME_DIR:?wpe-exported-wayland: XDG_RUNTIME_DIR not found in we
 
 # Check if the script is run as root and switch to the 'weston' user if needed
 if [ "$(id -u)" -eq 0 ]; then
-    su weston -c "/usr/bin/wpe-simple-launcher --ctrl $CTL_FILE $*"
+    ARGS=$(printf ' %q' "$@")
+    su weston -c "/usr/bin/wpe-simple-launcher --ctrl $CTL_FILE$ARGS"
 else
     /usr/bin/wpe-simple-launcher --ctrl "$CTL_FILE" "$@"
 fi
