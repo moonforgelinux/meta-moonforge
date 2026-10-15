@@ -47,13 +47,31 @@ fi
 # Keep only the first pid: busybox pidof has no -s (single shot) option.
 WESTON_PID="$(pidof weston-keyboard 2>/dev/null || true)"
 WESTON_PID="${WESTON_PID%% *}"
-if [ -z "$WESTON_PID" ] || [ ! -r "/proc/$WESTON_PID/environ" ]; then
-    echo "wpe-exported-wayland: unable to read weston-keyboard environment" >&2
-    exit 1
+
+ENVIRON=""
+if [ -n "$WESTON_PID" ]; then
+    ENVIRON="$(tr '\0' '\n' < "/proc/$WESTON_PID/environ" 2>/dev/null || true)"
 fi
 
-WAYLAND_DISPLAY="$(tr '\0' '\n' < "/proc/$WESTON_PID/environ" | grep -m1 '^WAYLAND_DISPLAY=')"
-XDG_RUNTIME_DIR="$(tr '\0' '\n' < "/proc/$WESTON_PID/environ" | grep -m1 '^XDG_RUNTIME_DIR=')"
+if [ -n "$ENVIRON" ]; then
+    WAYLAND_DISPLAY="$(printf '%s' "$ENVIRON" | grep -m1 '^WAYLAND_DISPLAY=')"
+    XDG_RUNTIME_DIR="$(printf '%s' "$ENVIRON" | grep -m1 '^XDG_RUNTIME_DIR=')"
+else
+    for _dir in /tmp /run/user/0 "/run/user/$(id -u)"; do
+        for _sock in wayland-0 wayland-1; do
+            if [ -S "$_dir/$_sock" ]; then
+                WAYLAND_DISPLAY="WAYLAND_DISPLAY=$_sock"
+                XDG_RUNTIME_DIR="XDG_RUNTIME_DIR=$_dir"
+                break 2
+            fi
+        done
+    done
+    if [ -z "$WAYLAND_DISPLAY" ]; then
+        echo "wpe-exported-wayland: unable to find Wayland display" >&2
+        exit 1
+    fi
+fi
+
 export "${WAYLAND_DISPLAY:?wpe-exported-wayland: WAYLAND_DISPLAY not found in weston-keyboard environ}"
 export "${XDG_RUNTIME_DIR:?wpe-exported-wayland: XDG_RUNTIME_DIR not found in weston-keyboard environ}"
 
