@@ -5,14 +5,21 @@ on:
       - main
     paths-ignore:
       - '**.md'
-  pull_request:
+  pull_request_target:
     branches:
       - main
     paths-ignore:
       - '**.md'
+    types:
+      - labeled
+
 jobs:
   build:
-    if: github.event.repository.fork == false
+    if: >
+      github.event.repository.fork == false && (
+      github.event_name == 'push' || (
+      github.event_name == 'pull_request_target' &&
+      github.event.label.name == 'build'))
     runs-on: [self-hosted, builder]
     permissions:
       contents: read
@@ -27,6 +34,8 @@ jobs:
           - alt
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: rlespinasse/github-slug-action@9e7def61550737ba68c62d34a32dd31792e3f429 #v5.5.0
       - uses: moonforgelinux/build-moonforge-action@990696f671bd414f4396d41db9c9fc35040f8a14 #v0.1.1
         with:
@@ -36,10 +45,6 @@ jobs:
           image_id: ${{ matrix.variant }}-${{ matrix.machine }}-${{ env.GITHUB_REF_NAME_SLUG }}
           image_version: ${{ github.run_id }}
       - uses: moonforgelinux/upload-moonforge-action@d81e5795bf561735e2331b3d7705884f170dfff9 #v0.2.1
-        if: >
-           github.event_name == 'push' || (
-           github.event_name == 'pull_request' &&
-           github.event.pull_request.head.repo.fork == false )
         with:
           host_base: ${{ secrets.S3_HOST_BASE }}
           access_key: ${{ secrets.S3_ACCESS_KEY }}
@@ -51,9 +56,7 @@ jobs:
           include: '*.wic.*'
 
   publish:
-    if: >
-      github.event_name == 'pull_request' &&
-      github.event.pull_request.head.repo.fork == false
+    if: github.event_name == 'pull_request_target'
     runs-on: [self-hosted, builder]
     needs: build
     permissions:
