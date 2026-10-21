@@ -1,6 +1,7 @@
 # meta-moonforge-wpe
 
-This layer adds WPE WebKit to display a configurable URL in a fullscreen kiosk window via the Cog browser.
+This layer adds WPE WebKit to display a configurable URL in a fullscreen kiosk window.
+It includes a very simple browser called `wpe-simple-launcher`.
 
 See: [meta-moonforge-wpe on moonforgelinux.org](https://moonforgelinux.org/docs/layers/moonforge-wpe/)
 
