@@ -35,7 +35,7 @@ header:
 
 local_conf_header:
   30_meta-moonforge-wpe: |
-    WAYLAND_COG_LAUNCH_URL = "https://www.moonforgelinux.org"
+    WPE_SIMPLE_LAUNCHER_URL = "https://www.moonforgelinux.org"
   30_meta-moonforge-raspberrypi: |
     # Specifies description file for partitioning the image
     WKS_FILE = "moonforge-image-base-raspberrypi.wks.in"
@@ -70,23 +70,22 @@ meta-moonforge
 │           ├── meta-openembedded.yml
 │           └── meta-webkit.yml
 └── meta-moonforge-wpe
-    ├── conf
-    │   └── layer.conf
-    ├── README.md
-    ├── recipes-core
-    │   ├── images
-    │   │   └── moonforge-image-base.bbappend
-    │   └── volatile-binds
-    │       └── volatile-binds.bbappend
-    └── recipes-graphics
-        └── wayland-cog-launch
-            ├── files
-            │   ├── wayland-cog-launch.in
-            │   └── wayland-cog-launch.service
-            └── wayland-cog-launch_1.0.bb
+    ├── conf
+    │   └── layer.conf
+    ├── README.md
+    ├── recipes-browser
+    │   └── wpe-simple-launcher
+    │       ├── wpe-simple-launcher
+    │       │   ├── wpe-ctl
+    │       │   ├── wpe-exported-wayland
+    │       │   └── wpe-simple-launcher.service.in
+    │       └── wpe-simple-launcher_git.bb
+    └── recipes-core
+        └── volatile-binds
+            └── volatile-binds.bbappend
 ```
 
-The **meta-meta-moonforge-wpe** directory is a regular Yocto layer. Following the example, this layer provides custom recipes for launching the *Cog browser* and extending the base image with that recipe and other required recipes.
+The **meta-meta-moonforge-wpe** directory is a regular Yocto layer. Following the example, this layer provides custom recipes for launching a simple browser based on WPE and extending the base image with that recipe and other required recipes.
 
 The **kas/include/layer/meta-moonforge-wpe.yml** YAML file is the kas fragment for that layer. See its contents below:
 
@@ -101,6 +100,9 @@ header:
 local_conf_header:
   20_meta-moonforge-wpe: |
     PREFERRED_PROVIDER_virtual/wpebackend = "wpebackend-fdo"
+    CORE_IMAGE_EXTRA_INSTALL += " \
+        wpe-simple-launcher \
+    "
 
 repos:
   meta-moonforge:
@@ -130,7 +132,7 @@ header:
 repos:
   meta-openembedded:
     url: http://git.openembedded.org/meta-openembedded
-    commit: 15e18246dd0c0585cd1515a0be8ee5e2016d1329
+    commit: bec755063a8b5da65df626f5749496aadaa4f4bb
     branch: scarthgap
 ```
 
