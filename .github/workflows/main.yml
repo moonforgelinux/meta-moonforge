@@ -12,6 +12,8 @@ on:
       - '**.md'
     types:
       - labeled
+env:
+  REF_NAME: ${{ github.event.pull_request.number || 'main' }}
 
 jobs:
   build:
@@ -36,13 +38,12 @@ jobs:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: rlespinasse/github-slug-action@9e7def61550737ba68c62d34a32dd31792e3f429 #v5.5.0
       - uses: moonforgelinux/build-moonforge-action@990696f671bd414f4396d41db9c9fc35040f8a14 #v0.1.1
         with:
           kas_file: kas/examples/moonforge-image-${{ matrix.variant }}-${{ matrix.machine }}.yml:kas/common/debug.yml:kas/common/throttle.yml
           dl_dir: ${{ vars.DL_DIR }}
           sstate_dir: ${{ vars.SSTATE_DIR }}
-          image_id: ${{ matrix.variant }}-${{ matrix.machine }}-${{ env.GITHUB_REF_NAME_SLUG }}
+          image_id: ${{ matrix.variant }}-${{ matrix.machine }}-${{ env.REF_NAME }}
           image_version: ${{ github.run_id }}
       - uses: moonforgelinux/upload-moonforge-action@d81e5795bf561735e2331b3d7705884f170dfff9 #v0.2.1
         with:
@@ -51,7 +52,7 @@ jobs:
           secret_key: ${{ secrets.S3_SECRET_KEY }}
           bucket: ${{ secrets.S3_BUCKET }}
           source: build/tmp/deploy/images/${{ matrix.machine }}
-          destination: meta-moonforge/${{ github.ref }}/${{ github.run_id }}/${{ matrix.variant }}/
+          destination: meta-moonforge/${{ env.REF_NAME }}/${{ github.run_id }}/${{ matrix.variant }}/
           exclude: '*'
           include: '*.wic.*'
 
@@ -66,4 +67,4 @@ jobs:
         with:
           message-id: ${{ github.run_id }}
           message-success: |
-            Successfully built [${{ github.run_id }}](${{ vars.S3_PUBLIC_URL }}/meta-moonforge/${{ github.ref }}/${{ github.run_id }}/) :rocket:
+            Successfully built [${{ github.run_id }}](${{ vars.S3_PUBLIC_URL }}/meta-moonforge/${{ env.REF_NAME }}/${{ github.run_id }}/) :rocket:
