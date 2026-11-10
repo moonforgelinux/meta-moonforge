@@ -32,17 +32,25 @@ FILES:${PN} = " \
 "
 
 RDEPENDS:${PN} += "\
+        curl \
         rauc \
         systemd \
 "
 
 RAUC_BUNDLE_URL ?= "https://localhost/ota/${IMAGE_ID}/LATEST.raucb"
 RAUC_FORCE_REBOOT_ON_UPDATE ?= "1"
+RAUC_DOWNLOAD_ON_UPDATE ?= "1"
 
 do_compile () {
-        RAUC_FLAGS=$([ "${RAUC_FORCE_REBOOT_ON_UPDATE}" = "1" ] && echo "-r" || echo "")
+        RAUC_FLAGS=""
+        if [ "${RAUC_DOWNLOAD_ON_UPDATE}" = "1" ]; then
+                RAUC_FLAGS="${RAUC_FLAGS} -d"
+        fi
+        if [ "${RAUC_FORCE_REBOOT_ON_UPDATE}" = "1" ]; then
+                RAUC_FLAGS="${RAUC_FLAGS} -r"
+        fi
         sed -e "s|@RAUC_BUNDLE_URL@|${RAUC_BUNDLE_URL}|g" rauc-update.service.in > rauc-update.service
-        sed -i "s|@RAUC_FLAGS@|${RAUC_FLAGS}|g" rauc-update.service
+        sed -i "s|@RAUC_FLAGS@|${RAUC_FLAGS# }|g" rauc-update.service
 }
 
 do_install () {
