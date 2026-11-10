@@ -4,15 +4,18 @@
 # SPDX-FileCopyrightText: 2025 Igalia S.L.
 #
 
-# Parse bundle URL and force reboot flag
+# Parse bundle URL and flags
 
 usage() {
-  echo "USAGE: $0 [-r] URL"
+  echo "USAGE: $0 [-d] [-r] URL"
   exit 1
 }
 
-while getopts ":r" opt; do
+while getopts ":dr" opt; do
   case "$opt" in
+    d)
+      RAUC_DOWNLOAD_ON_UPDATE="1"
+      ;;
     r)
       RAUC_FORCE_REBOOT_ON_UPDATE="1"
       ;;
@@ -76,6 +79,19 @@ fi
 if [[ "$RAUC_MF_VERSION" == "$INACTIVE_VERSION" ]]; then
     echo "INFO: version $RAUC_MF_VERSION already installed on inactive slot."
     exit 0
+fi
+
+# Download bundle if required
+
+if [ -n "$RAUC_DOWNLOAD_ON_UPDATE" ]; then
+    RAUC_BUNDLE_FILE="/data/bundle.raucb"
+    trap 'rm -f "$RAUC_BUNDLE_FILE"' EXIT INT TERM
+
+    if ! curl -fsSL -o "$RAUC_BUNDLE_FILE" "$RAUC_BUNDLE_URL"; then
+        exit 1
+    fi
+
+    RAUC_BUNDLE_URL="$RAUC_BUNDLE_FILE"
 fi
 
 # Try to update
