@@ -70,6 +70,7 @@ jobs:
           - raspberrypi5
         variant:
           - base
+          - full
     steps:
       - uses: actions/checkout@v6
         with:
