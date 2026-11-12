@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Static HTML Page</title>
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+        .number-list {
+            margin-top: 20px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="text">
+            <h2>Text</h2>
+
+            <!-- Regular text -->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            <!-- Bold text -->
+            <p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</strong></p>
+
+            <!-- Italic text -->
+            <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.</em></p>
+
+            <!-- Heading -->
+            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
+        </div>
+
+        <div class="numbers">
+            <h2>Numbers from 0 to 100</h2>
+            <!-- Generate numbers dynamically -->
+            <p><script>
+                for (let i = 0; i <= 100; i++) {
+                                    document.write(' ' + i);
+                                }
+            </script></p>
+            <p><strong><script>
+                    for (let i = 0; i <= 100; i++) {
+                                            document.write(' ' + i);
+                                        }
+            </script></strong></p>
+            <p><em><script>
+                    for (let i = 0; i <= 100; i++) {
+                                            document.write(' ' + i);
+                                        }
+            </script></em></p>
+            <h2><script>
+                    for (let i = 0; i <= 100; i++) {
+                                            document.write(' ' + i);
+                                        }
+            </script></h2>
+        </div>
+        <div class="status">
+            <h2> Status:
+                <script>
+                    document.write('Ready');
+                </script>
+            </h2>
+        </div>
+    </body>
+</html>
