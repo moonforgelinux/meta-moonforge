@@ -59,7 +59,7 @@ jobs:
           include: '*.wic.*'
 
   test:
-    timeout-minutes: 30
+    timeout-minutes: 45
     runs-on: [self-hosted, dutcontrol]
     needs: build
     permissions:
@@ -71,17 +71,25 @@ jobs:
         variant:
           - base
           - full
+          - alt
+        include:
+          - variant: base
+            suite: base.robot
+          - variant: full
+            suite: full.robot
+          - variant: alt
+            suite: alt
     steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
           allow-unsafe-pr-checkout: true
-      - uses: moonforgelinux/lab-moonforge-action/robot@v0.1.0
+      - uses: moonforgelinux/lab-moonforge-action/robot@v0.2.0
         with:
           runner: robot
           workdir: tests
-          run: ${{ matrix.variant }}.robot
+          run: ${{ matrix.suite }}
           dut_pool: ${{ matrix.machine }}
           dut_image: ${{ vars.S3_PUBLIC_URL }}/meta-moonforge/${{ env.REF_NAME }}/${{ github.run_id }}/${{ matrix.variant }}/${{ matrix.machine }}/moonforge-image-base-${{ matrix.machine }}-${{ github.run_id }}.wic.bz2
           dut_control_url: ${{ vars.DUT_CONTROL_URL }}
