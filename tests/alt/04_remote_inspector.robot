@@ -11,8 +11,6 @@ Suite Teardown    Restore The Launcher Service
 *** Variables ***
 ${INSPECTOR_PORT}    22322
 ${PAGE_TITLE}        Inspected Page
-# Matches the launcher itself, not the su or shell that started it.
-${LAUNCHER}          ^/usr/bin/wpe-simple-launcher
 
 *** Test Cases ***
 The inspector lists the page
@@ -31,14 +29,6 @@ The inspector serves its user interface
     Get Inspector Page    /Main.js
 
 *** Keywords ***
-Stop The Launcher
-    [Documentation]    Stopping the service is not enough: su moves the
-    ...                launcher to a session of its own, out of the service.
-    ...                The image has pgrep but no pkill.
-    Execute Command    systemctl stop wpe-simple-launcher
-    Execute Command    kill $(pgrep -f '${LAUNCHER}')
-    Wait Until Keyword Succeeds    10s    1s    Run On Device    ! pgrep -f '${LAUNCHER}'
-
 Start The Launcher With The Inspector
     Stop The Launcher
     Execute Command
@@ -48,10 +38,6 @@ Start The Launcher With The Inspector
 The Inspector Lists The Page
     ${body}=    Get Inspector Page    /
     Should Contain    ${body}    ${PAGE_TITLE}
-
-Restore The Launcher Service
-    Stop The Launcher
-    Run On Device    systemctl start wpe-simple-launcher
 
 Get Inspector Page
     [Documentation]    Read a page of the inspector HTTP server from the runner.
