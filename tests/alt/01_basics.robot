@@ -33,6 +33,11 @@ The CPU has an L2 cache
     ...                the first CPU.
     Run On Device    test -d /sys/devices/system/cpu/cpu0/cache/index2
 
+The clock is synchronized
+    [Documentation]    Verify systemd-timesyncd sets the clock within 2 minutes.
+    Wait Until Keyword Succeeds    2 minutes    5s    Run On Device
+    ...    journalctl -b -u systemd-timesyncd | grep -q 'Initial clock synchronization'
+
 *** Keywords ***
 Kernel Option Should Be Enabled
     [Documentation]    /proc/config.gz needs the configs module.
