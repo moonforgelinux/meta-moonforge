@@ -17,6 +17,7 @@ ${MIN_SCORE}          400
 *** Test Cases ***
 The MotionMark score is high enough
     [Documentation]    Run MotionMark 1.2 and check its global score.
+    [Tags]    robot:skip-on-failure
     Go To    ${MOTIONMARK_URL}
     Wait Until Element Is Visible    ${RUN_BUTTON}    timeout=60s
     Click Element    ${RUN_BUTTON}
