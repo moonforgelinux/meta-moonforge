@@ -1,7 +1,7 @@
 [Unit]
 Description=Simple WPE launcher for Weston
-After=network-online.target
-Wants=network-online.target
+After=network-online.target time-sync.target
+Wants=network-online.target time-sync.target
 After=weston.service
 
 [Service]
