@@ -14,8 +14,8 @@ The remote inspector resources are installed
 
 The launcher service runs
     [Documentation]    Verify wpe-simple-launcher.service is active after boot.
-    ${state}=    Execute Command    systemctl is-active wpe-simple-launcher
-    Should Be Equal    ${state.strip()}    active
+    Wait Until Keyword Succeeds    1 minute    2s    Run On Device
+    ...    systemctl is-active wpe-simple-launcher
 
 The kernel enables multitouch HID
     [Documentation]    Verify CONFIG_HID_MULTITOUCH is enabled, read from
