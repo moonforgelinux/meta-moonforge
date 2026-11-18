@@ -7,4 +7,6 @@ Resource          common.resource
 Suite Setup       Run Keywords
 ...               Log In To The Device    AND
 ...               Wait Until Clock Is Synchronized
-Suite Teardown    Close All Connections
+Suite Teardown    Run Keywords
+...               Save The Journal    AND
+...               Close All Connections

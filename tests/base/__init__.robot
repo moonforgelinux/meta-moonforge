@@ -5,4 +5,6 @@ Documentation     Basic sanity checks for a Moonforge base image.
 ...               with the empty root password enabled by kas/common/debug.yml.
 Resource          ../common/common.resource
 Suite Setup       Log In To The Device
-Suite Teardown    Close All Connections
+Suite Teardown    Run Keywords
+...               Save The Journal    AND
+...               Close All Connections
