@@ -22,3 +22,8 @@ Run On Device
     ${output}    ${rc}=    Execute Command    ${command}    return_rc=${True}
     Should Be Equal As Integers    ${rc}    0    '${command}' failed
     RETURN    ${output}
+
+Wait Until Clock Is Synchronized
+    [Documentation]    Wait up to 2 minutes for systemd-timesyncd to set the clock.
+    Wait Until Keyword Succeeds    2 minutes    5s    Run On Device
+    ...    journalctl -b -u systemd-timesyncd | grep -q 'Initial clock synchronization'
