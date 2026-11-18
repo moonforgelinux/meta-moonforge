@@ -78,7 +78,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
           allow-unsafe-pr-checkout: true
-      - uses: moonforgelinux/lab-moonforge-action/robot@v0.2.0
+      - uses: moonforgelinux/lab-moonforge-action/robot@ad91846b4b521fb90c9b5a96dc825aa26c141606 #v0.2.0
         with:
           runner: robot
           workdir: tests
