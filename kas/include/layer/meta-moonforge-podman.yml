@@ -12,6 +12,7 @@ local_conf_header:
         podman \
         podman-compose \
         ca-certificates \
+        python3-modules \
     "
 
 repos:

@@ -4,5 +4,5 @@ header:
 repos:
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
-    commit: bec755063a8b5da65df626f5749496aadaa4f4bb
-    branch: scarthgap
+    commit: c0fcd7cca3760ef24e087ac4a31b8f357cb204da
+    branch: wrynose
