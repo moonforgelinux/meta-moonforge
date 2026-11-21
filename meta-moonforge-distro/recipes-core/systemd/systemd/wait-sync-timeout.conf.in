@@ -1,0 +1,2 @@
+[Service]
+TimeoutStartSec=@TIME_SYNC_TIMEOUT@
