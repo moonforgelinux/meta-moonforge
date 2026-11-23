@@ -10,6 +10,7 @@ TIME_SYNC_ACTION = "${@'disable' if d.getVar('TIME_SYNC_TIMEOUT') == '0' else 'e
 
 SRC_URI += "\
     file://80-moonforge.preset.in \
+    file://retry.conf \
     file://wait-any.conf \
     file://wait-sync-timeout.conf.in \
 "
@@ -34,10 +35,15 @@ do_install:append() {
     # Timeout override (dormant if preset is disabled)
     install -Dm 0644 ${WORKDIR}/wait-sync-timeout.conf \
         ${D}${systemd_system_unitdir}/systemd-time-wait-sync.service.d/wait-sync-timeout.conf
+
+    # Reduce timesyncd retry interval to avoid backoff after early DNS failures
+    install -Dm 0644 ${WORKDIR}/retry.conf \
+        ${D}${systemd_unitdir}/timesyncd.conf.d/retry.conf
 }
 
 FILES:${PN} += "\
     ${systemd_unitdir}/system-preset/80-moonforge.preset \
+    ${systemd_unitdir}/timesyncd.conf.d/retry.conf \
     ${systemd_system_unitdir}/systemd-networkd-wait-online.service.d/wait-any.conf \
     ${systemd_system_unitdir}/systemd-time-wait-sync.service.d/wait-sync-timeout.conf \
 "
