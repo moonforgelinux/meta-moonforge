@@ -1,0 +1,1 @@
+@TIME_SYNC_ACTION@ systemd-time-wait-sync.service

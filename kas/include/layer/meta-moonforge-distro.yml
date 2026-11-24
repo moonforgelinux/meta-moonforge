@@ -34,6 +34,8 @@ local_conf_header:
     IMAGE_DATA_MIN_SIZE ?= "100M"
     # Enable overlayfs for persistent data
     KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
+    # Sets the timeout for systemd-time-wait-sync.service
+    TIME_SYNC_TIMEOUT ?= "60"
 
 build_system: oe
 
